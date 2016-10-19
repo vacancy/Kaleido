@@ -10,5 +10,5 @@ for those who are interested in symbolic computation libs.
 Finally, it is a demo project, so do NOT use it in production environment.
 
 # Examples
-You can find two simple examples in folder ``exampls``.
+You can find two simple examples in folder ``examples``.
 
