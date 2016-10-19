@@ -24,7 +24,7 @@ class SingleOutputOprNodeBase(OutputNumFixedOprNodeBase):
 
     def _init_outputs(self):
         assert type(self).__nr_outputs__ == 1
-        self._set_outputs([VarNode(self, 0, name=self.name)])
+        self._set_outputs([VarNode(self, 0)])
 
 
 class SISOOprNodeBase(SingleOutputOprNodeBase):

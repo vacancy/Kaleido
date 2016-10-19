@@ -42,6 +42,12 @@ class Parameter(NetSrcOprNodeBase):
         super().__init__(name=name)
         self._value = value
 
+    def get_value(self):
+        return self._value
+
+    def set_value(self, value):
+        self._value = value
+
     def _do_fprop(self, env):
         self.outputs[0].set_value(self._value)
 
@@ -49,9 +55,25 @@ class Parameter(NetSrcOprNodeBase):
         return 0
 
 
-class Immutable(Parameter):
-    pass
+class Immutable(NetSrcOprNodeBase):
+    def __init__(self, value, name=None):
+        super().__init__(name=name)
+        self._value = value
+
+    def get_value(self):
+        return self._value
+
+    def set_value(self, value):
+        self._value = value
+
+    def _do_fprop(self, env):
+        self.outputs[0].set_value(self._value)
+
+    def _do_bprop(self, env, idx):
+        return 0
+
 
 
 placeholder = as_opr_func(PlaceHolder)
 parameter = as_opr_func(Parameter)
+immutable = as_opr_func(Immutable)

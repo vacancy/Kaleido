@@ -8,5 +8,6 @@
 # (c) 2016 vccy.xyz
 
 
-from .arith import add, neg
-from .netsrc import placeholder, parameter
+from .arith import add, sub, neg, mul, div, pow, sum, max, min, matmul, ge, gt, eq, shapeof, shapeidx, update
+from .netsrc import placeholder, parameter, Parameter
+from .grad import grad

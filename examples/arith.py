@@ -9,15 +9,30 @@
 
 from hitomi import opr
 from hitomi.graph import CompGraph
+import numpy as np
 
 if __name__ == '__main__':
     a = opr.placeholder('a')
     b = opr.placeholder('b')
-    c = opr.add(a, b)
+    c = opr.add(a, b, name='a+b')
+    d = opr.add(c, a)
+    sum_d = opr.sum(d)
+    e = opr.grad(sum_d, b)
 
-    func = CompGraph().compile([c])
+    func = CompGraph().compile([c, e])
 
-    cv,  = func(a=1, b=2)
-    print('{}+{}={}'.format(1, 2, cv))
-    cv,  = func(a=5, b=4)
-    print('{}+{}={}'.format(5, 4, cv))
+    print(func(a=np.ones([5]) * 1, b=2))
+    print(func(a=5, b=4))
+
+    a = opr.placeholder('a')
+    b = opr.placeholder('b')
+    c = opr.mul(a, b)
+    c = opr.add(c, 1)
+    c = opr.mul(c, [10, 10])
+    c = opr.max(c, 50)
+    d = c
+    c = opr.sum(c)
+    func = CompGraph().compile([d, c, opr.grad(c, a), opr.grad(c, b)])
+    print(func(a=[1, 2], b=3))
+
+    # from IPython import embed; embed()
