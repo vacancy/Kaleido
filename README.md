@@ -1,4 +1,4 @@
-# Hitomi 
+# [瞳] Hitomi 
 A demo project for a tiny auto-diff symbolic numerical operation library. 
 
 This project is a school project for course ``Advanced Apps of Machine Learning`` at ``Tsinghua University``
