@@ -15,7 +15,7 @@ import numpy as np
 def make_data():
     import pickle
 
-    with open('data.in', 'rb') as f:
+    with open('data.pkl', 'rb') as f:
         a = pickle.load(f, encoding='latin1')
     x = np.array([i[0] for i in a])
     y = np.array([i[1] for i in a])
