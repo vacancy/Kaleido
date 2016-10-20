@@ -19,7 +19,7 @@ def make_data():
         a = pickle.load(f, encoding='latin1')
     x = np.array([i[0] for i in a])
     y = np.array([i[1] for i in a])
-    x[np.where(y == 1)] += [0.27, -0.025]
+    # x[np.where(y == 1)] += [0.27, -0.025]
     return x, y
 
 
@@ -41,7 +41,7 @@ def demo_graph(xs, pred, label, W, b):
     lxs = np.arange(-2, 2, 0.01)
     lys = (- b - lxs * W[0]) / W[1]
     plt.plot(lxs, lys)
-    plt.xlim(0.3, 1.2)
+    plt.xlim(0.0, 1.2)
     plt.ylim(0.65, 1.2)
     plt.show()
 
@@ -61,7 +61,7 @@ def make_svm():
     decay = opr.mul(W, W) / 2
     decay = decay.sum()
 
-    loss = 0.01 * decay + hinge_loss
+    loss = decay + hinge_loss * 100
 
     return pred, loss
 
@@ -70,16 +70,19 @@ def make_func(pred, loss, is_train, lr=1):
     cg = CompGraph()
 
     if is_train:
+        lr = opr.parameter(lr)
+
         optimizable = []
         for o in cg.find_all_oprs([loss]):
             if isinstance(o, opr.Parameter):
                 optimizable.append(o.outputs[0])
         updates = []
+        outputs = []
         for o in optimizable:
             updates.append(opr.update(o, o - lr * opr.grad(loss, o)))
 
-        func = cg.compile([loss] + updates)
-        return func
+        func = cg.compile([loss] + updates + outputs)
+        return func, lr.owner_opr
     else:
         func = cg.compile([pred])
         return func, cg.find_opr([loss], 'W'), cg.find_opr([loss], 'b')
@@ -89,10 +92,12 @@ def main():
     pred, loss = make_svm()
 
     xs, ys = make_data()
-    lr = 1
+    lr = 0.1
 
-    train_func = make_func(pred, loss, True, lr=lr)
-    for i in range(1000):
+    train_func, lr = make_func(pred, loss, True, lr=lr)
+    for i in range(200):
+        if i > 0 and i % 5 == 0:
+            lr.set_value(lr.get_value() * 0.9)
         res = train_func(x=xs, label=ys)
         print('iter {}, loss={}'.format(i, res[0]))
 

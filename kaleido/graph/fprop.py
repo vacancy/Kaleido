@@ -131,8 +131,8 @@ class CompGraph(object):
 
         for o in self._all_oprs:
             if isinstance(o, Gradient):
-                self._grad_wrts.setdefault(o.inputs[0], set())
-                self._grad_wrts[o.inputs[0]].add(o)
+                self._grad_wrts.setdefault(o.inputs[0], list())
+                self._grad_wrts[o.inputs[0]].append(o)
                 self._grad_oprs.append(o)
 
     def _split_oprs(self):
@@ -154,7 +154,7 @@ class CompGraph(object):
                 o.clear_grad()
 
         wrts = [opr.inputs[1] for opr in self._grad_wrts[loss]]
-        all_oprs, out_edges = TopoSorter([loss], [wrt.owner_opr for wrt in wrts]).sort()
+        all_oprs, out_edges = TopoSorter([loss], list({wrt.owner_opr for wrt in wrts})).sort()
 
         visited = set()
         queue = deque()
