@@ -4,5 +4,5 @@
 # Email  : maojiayuan@gmail.com
 # Date   : 10/17/16 13:03
 # 
-# This file is part of Hitomi
+# This file is part of Kaleido
 # (c) 2016 vccy.xyz

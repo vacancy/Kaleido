@@ -4,7 +4,7 @@
 # Email  : maojiayuan@gmail.com
 # Date   : 10/17/16 13:03
 # 
-# This file is part of Hitomi
+# This file is part of Kaleido
 # (c) 2016 vccy.xyz
 
 import numpy as np
@@ -276,7 +276,7 @@ class OprNodeBase(object):
 
 def as_opr_func(OprCls):
     def func(*args, **kwargs):
-        from hitomi.opr.base import SingleOutputOprNodeBase
+        from kaleido.opr.base import SingleOutputOprNodeBase
         opr = OprCls(*args, **kwargs)
         if issubclass(OprCls, SingleOutputOprNodeBase):
             return opr.outputs[0]

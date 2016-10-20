@@ -4,11 +4,11 @@
 # Email  : maojiayuan@gmail.com
 # Date   : 10/19/16 20:29
 # 
-# This file is part of Hitomi
+# This file is part of Kaleido
 # (c) 2016 vccy.xyz
 
-from hitomi import opr
-from hitomi.graph import CompGraph
+from kaleido import opr
+from kaleido.graph import CompGraph
 import numpy as np
 
 

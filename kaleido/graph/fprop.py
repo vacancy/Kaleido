@@ -4,7 +4,7 @@
 # Email  : maojiayuan@gmail.com
 # Date   : 10/17/16 13:09
 # 
-# This file is part of Hitomi
+# This file is part of Kaleido
 # (c) 2016 vccy.xyz
 
 from collections import deque

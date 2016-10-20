@@ -4,7 +4,7 @@
 # Email  : maojiayuan@gmail.com
 # Date   : 10/18/16 15:40
 # 
-# This file is part of Hitomi
+# This file is part of Kaleido
 # (c) 2016 vccy.xyz
 
 from .base import SingleOutputOprNodeBase
