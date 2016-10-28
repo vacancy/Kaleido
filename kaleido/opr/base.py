@@ -29,3 +29,10 @@ class SingleOutputOprNodeBase(OutputNumFixedOprNodeBase):
 
 class SISOOprNodeBase(SingleOutputOprNodeBase):
     __nr_inputs__ = 1
+
+
+def get_2dshape(x):
+    if type(x) in (int, float):
+        return x, x
+    assert type(x) in (tuple, list) and len(x) == 2, x
+    return x

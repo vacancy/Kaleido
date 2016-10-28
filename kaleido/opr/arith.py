@@ -197,6 +197,31 @@ class Pow(BinaryElemwiseOprNodeBase):
             return a ** b * np.log(a)
 
 
+class Exp(UnaryElemwiseOprNodeBase):
+    def _do_unary_fprop(self, env, x):
+        return np.exp(x)
+
+    def _do_unary_bprop(self, env, g):
+        return g * self.outputs[0].get_value()
+
+
+class Log(UnaryElemwiseOprNodeBase):
+    def _do_unary_fprop(self, env, x):
+        return np.log(x)
+
+    def _do_unary_bprop(self, env, g):
+        return g / self.inputs[0].get_value()
+
+
+class Tanh(UnaryElemwiseOprNodeBase):
+    def _do_unary_fprop(self, env, x):
+        return np.tanh(x)
+
+    def _do_unary_bprop(self, env, g):
+        y = self.outputs[0].get_value()
+        return g * (1 - y ** 2)
+
+
 class Sum(UnaryElemwiseOprNodeBase):
     def _do_unary_fprop(self, env, x):
         return x.sum()
@@ -322,6 +347,9 @@ neg = as_opr_func(Neg)
 mul = as_opr_func(Mul)
 div = as_opr_func(Div)
 pow = as_opr_func(Pow)
+exp = as_opr_func(Exp)
+log = as_opr_func(Log)
+tanh = as_opr_func(Tanh)
 sum = as_opr_func(Sum)
 max = as_opr_func(Max)
 min = as_opr_func(Min)

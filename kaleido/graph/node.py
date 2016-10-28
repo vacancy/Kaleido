@@ -244,6 +244,7 @@ class OprNodeBase(object):
         self.__outputs = outputs
 
     def fprop(self, env):
+        print('fproping', str(self))
         for i in self.__inputs:
             assert i.is_value_set, 'Got invalid input at opr={}, input={}'.format(str(self), str(i))
         self._do_fprop(env)
@@ -251,6 +252,7 @@ class OprNodeBase(object):
             o.get_value()  # try to get value
 
     def bprop(self, env):
+        print('bproping', str(self))
         for idx, i in enumerate(self.__inputs):
             if i.need_grad:
                 self.inputs[idx].set_or_accumulate_grad(self._do_bprop(env, idx))

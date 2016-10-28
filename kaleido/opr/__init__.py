@@ -8,6 +8,10 @@
 # (c) 2016 vccy.xyz
 
 
-from .arith import add, sub, neg, mul, div, pow, sum, max, min, matmul, ge, gt, eq, shapeof, shapeidx, update
+from .arith import add, sub, neg, mul, div, pow, exp, log, tanh, sum, max, min, matmul, ge, gt, eq
+from .arith import shapeof, shapeidx, update
+from .cnn import conv2d, pooling2d
+from .index import index_onehot, flatten2
+from .reduce import reduce_max, reduce_min, reduce_sum
 from .netsrc import placeholder, parameter, Parameter
 from .grad import grad
