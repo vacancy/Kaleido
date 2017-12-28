@@ -8,6 +8,7 @@
 
 from setuptools import setup
 from distutils.extension import Extension
+from Cython.Distutils import build_ext
 import numpy as np
 
 
@@ -32,5 +33,6 @@ setup(
     author='Jiayuan Mao',
     author_email='maojiayuan@gmail.com',
     packages=['kalendo'],
-    ext_modules=ext_modules
+    ext_modules=ext_modules,
+    cmdclass={'build_ext': build_ext}
 )
